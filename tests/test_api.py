@@ -217,7 +217,7 @@ async def test_send_message_to_nonexistent_room(client: AsyncClient):
     token_a = await get_token_by_login_user("usr_a", client)
     headers_a = {"Authorization": f"Bearer {token_a}"}
 
-    response = await client.post("/rooms/999999/messages",
+    response = await client.post("/rooms/999999/messages/",
                                  json={
                                      "content" : "edrvgbhjnk"
                                  },
