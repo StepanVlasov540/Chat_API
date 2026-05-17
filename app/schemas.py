@@ -27,7 +27,6 @@ class RoomOut(BaseModel):
 
 class MessageCreate(BaseModel):
     content: str = Field(min_length=1)
-    room_id: int
 
 class MessageOut(BaseModel):
     id: int

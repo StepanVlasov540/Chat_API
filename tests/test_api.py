@@ -217,13 +217,18 @@ async def test_send_message_to_nonexistent_room(client: AsyncClient):
     token_a = await get_token_by_login_user("usr_a", client)
     headers_a = {"Authorization": f"Bearer {token_a}"}
 
-    response = await client.post("/rooms/999999/messages/",
-                                 json={
-                                     "content" : "edrvgbhjnk"
-                                 },
-                                 headers=headers_a)
+    room_id = 999999
+
+    response = await client.post(
+        f"/rooms/{room_id}/messages/",
+        json={
+            "content": "frist-message"
+        },
+        headers=headers_a
+    )
 
     assert response.status_code == 404
+
 
 async def test_unauthorized_access(client: AsyncClient):
     room_res = await client.post("/rooms/", json={"name": "test_join"})
