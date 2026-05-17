@@ -65,6 +65,10 @@ jobs:
         SERVER_USER: ${{ secrets.SERVER_USER }}
         SERVER_HOST: ${{ secrets.SERVER_HOST }}
       run: |
+        if [ -z "$SSH_PRIVATE_KEY" ] || [ -z "$SERVER_USER" ] || [ -z "$SERVER_HOST" ]; then
+          echo "No server credentials set, skipping deployment."
+          exit 0
+        fi
         mkdir -p ~/.ssh
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
